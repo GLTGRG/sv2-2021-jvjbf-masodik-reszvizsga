@@ -16,13 +16,13 @@ public class City {
 
     public void addBuilding(Building building) {
         int areaCoverage = 0;
-        for (Building actual : buildings) {
-            areaCoverage += actual.getArea();
+        for (Building b : buildings) {
+            areaCoverage += b.getArea();
         }
         if (areaCoverage + building.getArea() <= fullArea) {
             buildings.add(building);
         } else {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("City can't be larger than 500");
         }
     }
 
@@ -34,6 +34,16 @@ public class City {
             }
         }
         return highestBuilding;
+    }
+
+    public List<Building> findBuildingsByStreet(String street) {
+        List<Building> buildingByStreet = new ArrayList<>();
+        for (Building b : buildings) {
+            if (b.getAddress().getStreet().equals(street)) {
+                buildingByStreet.add(b);
+            }
+        }
+        return buildingByStreet;
     }
 
     public String getName() {
